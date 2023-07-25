@@ -5,9 +5,12 @@ A way to get MNI coordinates for subcortical voxels of a CIFTI file
 
 In this post, I will demonstrate how it is possible to use the R
 packages `cifti` and `ciftiTools` to get the MNI coordinates of the
-subcortical voxels. This table can then be used to select voxels based
-on their coordinates and do further things with them (e.g. create
-masks).
+subcortical voxels in your CIFTI file. This table can then be used to
+select voxels based on their coordinates and do further things with them
+like creating masks.
+
+For this, we convert the IJK voxel index coordinates found in th XML
+meta data of the CIFTI file to MNI coordinates.
 
 # Libraries used
 
@@ -42,7 +45,7 @@ sessioninfo::session_info()
     ##  collate  English_United States.1252
     ##  ctype    English_United States.1252
     ##  tz       Asia/Taipei
-    ##  date     2023-07-24
+    ##  date     2023-07-25
     ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## - Packages -------------------------------------------------------------------
@@ -85,7 +88,7 @@ sessioninfo::session_info()
 
 # Loading the CIFTI files
 
-Below, you can see how I load CIFTI files based on “A Multi-modal
+Below, you can see how I load the CIFTI file from “A Multi-modal
 Parcellation of Human Cerebral Cortex”.
 
 ``` r
@@ -150,21 +153,23 @@ xii_xml_list <- xml2::as_list(xii_xml)
 # Get information from XML
 
 After loading the XML data, I am convert it to list using the `xml2`
-package. Now, we have loaded everything that is needed to create a table
-with all MNI coordinates. `xii_xml_list` is quite a complicated
-structure so I am not really going through this. The important bit is
-that is contains the VoxelIndicesIJK ([see
+package.
+
+Now we have loaded everything that is needed to create a table with all
+MNI coordinates. `xii_xml_list` is quite a complicated structure so I am
+not really going through this. The important bit is that it contains the
+`VoxelIndicesIJK` ([see
 here](https://www.slicer.org/wiki/Slicer3:Coordinates)), which we need
-to convert to MNI. The voxel index coordinates can be found in matrix
-index map:
+to get our MNI coordinates. The voxel index coordinates can be found in
+matrix index map:
 
 ``` r
 matrix_indices_map <- xii_xml_list$CIFTI$Matrix[[3]]
 ```
 
 In `matrix_indices_map`, List 4 to 22 contains the information for the
-subcortical voxels in the order the listed in the summary above. Now, I
-will extract all voxel index coordinates and but them into one 31870 x 3
+subcortical voxels in the order listed in the summary above. I will now
+extract all voxel index coordinates and put them into one 31870 by 3
 matrix.
 
 ``` r
@@ -208,9 +213,9 @@ regions_row <- rep(regions, times = numVoxels)
 
 # Convert from voxel index coordinates to MNI
 
-Now we can simply use the translation matrix and follow [these
-steps](http://rfmri.org/node/1300). We get the translation matrix from
-the meta data.
+After all that preparation, we can simply use the translation matrix and
+follow [these steps](http://rfmri.org/node/1300). We get the translation
+matrix from the meta data of the xifti variable.
 
 ``` r
 A <- xii$meta$subcort$trans_mat
@@ -225,8 +230,8 @@ The translation matrix is
 |   0 |   0 |   2 |  -72 |
 |   0 |   0 |   0 |    1 |
 
-Now, we need to add a column of 1 (no idea actually why) and transpose
-the matrix.
+We need to add a column of 1s (no idea actually why) and transpose the
+matrix.
 
 ``` r
 VoxelIndicesIJK_t <- t(cbind(VoxelIndicesIJK, 1))
@@ -245,7 +250,7 @@ MNI <- MNI[, -4]
 
 Now, we got what we wanted, which a 31870 by 3 matrix with the MNI
 coordinates as columns. Here are the first six values, which should all
-belong the left accumbens:
+belong to the left accumbens:
 
 ``` r
 head(MNI)
@@ -259,9 +264,9 @@ head(MNI)
     ## [5,]  -10    8  -16
     ## [6,]   -6    4  -14
 
-As a last step, I am going to verify whether the MNI coordinates fit. So
-for that, I take a random voxel from the left hippocampus and use
-wb_view if this voxel is indeed in the hippocampus based on the
+As a last step, I am going to verify whether the MNI coordinates fit.
+For that, I take a random voxel from the left hippocampus and use
+wb_view to see if this voxel is indeed in the hippocampus based on the
 parcellation file used above.
 
 ``` r
@@ -312,4 +317,18 @@ head(MNI_DF)
     ## 5 Accumbens-L -10 8 -16
     ## 6 Accumbens-L  -6 4 -14
 
-can now be downloaded [here]().
+can now be downloaded
+[here](https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601).
+
+# Edit 25/07/2023
+
+The maintainer of the [GitHub
+page](https://github.com/mandymejia/ciftiTools/issues/53) pointed out
+that the information saved in the `xifti` variable is actually also
+enough to calculate the voxel index coordinates. This can be done via:
+
+``` r
+VoxelIndicesIJK <- which(xii$meta$subcort$mask, arr.ind=TRUE) - 1
+```
+
+The minus 1 seems to be necessary to ensure both values are the same.
