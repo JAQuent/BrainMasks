@@ -14,6 +14,7 @@ Here, I am creating a number of hippocampal masks that divide the hippocampus al
 ```{r}
 # Load the ciftiTools package and point to the Connectome Workbench --------
 library(cifti)
+# install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
 library(ciftiTools)
 ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
 
@@ -35,7 +36,6 @@ sessioninfo::session_info()
 ```
 </details>
 
-# 
 
 # CIFTI files & other parameters
 ```{r}
@@ -306,10 +306,10 @@ view_cifti_volume(xii_AP, plane = "sagittal", n_slices = 16,
 ```
 
 
-We can also use the `ciftiTools` package to write a new CIFTI file. For now, I can write .dlabel files so I am using .dscalar.
+We can also use the `ciftiTools` package to write a new CIFTI file. For now, I can write .dlabel files so I am using .dlabel.
 
 ```{r poppenk_AP_write}
-write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dscalar.nii",
+write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -440,10 +440,10 @@ view_cifti_volume(xii_HBT, plane = "sagittal", n_slices = 16,
                   title = "Hippocampi coloured by H/B/T division")
 ```
 
-Again, for now I just write the while as a .dscalar file because I get an error message for .dlabel
+Again, for now I just write the while as a .dlabel file because I get an error message for .dlabel
  
 ```{r poppenk_HBT_write}
-write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dscalar.nii",
+write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -497,5 +497,9 @@ ggplot(HPC_CA_HBT_agg, aes(x = Network, y = Frequency, fill = Network)) +
   theme_classic() +
   theme(legend.position = "none")
 ```
+
+
+
+
 
 

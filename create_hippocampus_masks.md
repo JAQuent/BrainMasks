@@ -15,6 +15,7 @@ network membership).
 ``` r
 # Load the ciftiTools package and point to the Connectome Workbench --------
 library(cifti)
+# install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
 library(ciftiTools)
 ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
 ```
@@ -53,7 +54,7 @@ sessioninfo::session_info()
     ##  collate  English_United States.1252
     ##  ctype    English_United States.1252
     ##  tz       Asia/Taipei
-    ##  date     2023-07-25
+    ##  date     2023-07-28
     ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## - Packages -------------------------------------------------------------------
@@ -63,7 +64,7 @@ sessioninfo::session_info()
     ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.2.0)
     ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.2.0)
     ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.2.3)
-    ##  ciftiTools         * 0.11.0  2023-07-24 [1] Github (mandymejia/ciftiTools@109fb2e)
+    ##  ciftiTools         * 0.11.0  2023-07-27 [1] Github (mandymejia/ciftiTools@de6dda5)
     ##  cli                  3.6.0   2023-01-09 [1] CRAN (R 4.2.2)
     ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.2.2)
     ##  cowplot            * 1.1.1   2020-12-30 [1] CRAN (R 4.2.2)
@@ -116,8 +117,6 @@ sessioninfo::session_info()
     ## ------------------------------------------------------------------------------
 
 </details>
-
-# 
 
 # CIFTI files & other parameters
 
@@ -436,10 +435,10 @@ view_cifti_volume(xii_AP, plane = "sagittal", n_slices = 16,
 ![](create_hippocampus_masks_files/figure-gfm/show_poppenk_AP_xifti-1.png)<!-- -->![](create_hippocampus_masks_files/figure-gfm/show_poppenk_AP_xifti-2.png)<!-- -->
 
 We can also use the `ciftiTools` package to write a new CIFTI file. For
-now, I can write .dlabel files so I am using .dscalar.
+now, I can write .dlabel files so I am using .dlabel.
 
 ``` r
-write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dscalar.nii",
+write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -594,11 +593,11 @@ view_cifti_volume(xii_HBT, plane = "sagittal", n_slices = 16,
 
 ![](create_hippocampus_masks_files/figure-gfm/show_poppenk_HBT_xifti-1.png)<!-- -->![](create_hippocampus_masks_files/figure-gfm/show_poppenk_HBT_xifti-2.png)<!-- -->
 
-Again, for now I just write the while as a .dscalar file because I get
-an error message for .dlabel
+Again, for now I just write the while as a .dlabel file because I get an
+error message for .dlabel
 
 ``` r
-write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dscalar.nii",
+write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
