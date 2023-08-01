@@ -14,7 +14,7 @@ Here, I am creating a number of hippocampal masks that divide the hippocampus al
 ```{r}
 # Load the ciftiTools package and point to the Connectome Workbench --------
 library(cifti)
-# install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
+# devtools::install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
 library(ciftiTools)
 ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
 
