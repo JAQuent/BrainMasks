@@ -483,6 +483,9 @@ yValues  <- sort(unique(c(HC_R$y, HC_L$y)))
 yN       <- length(yValues)
 yColours <- viridis(n = yN, option = "C")
 
+# Reserve the colours to match the projection
+yColours <- yColours[length(yColours):1]
+
 # Change hippocampus data_________
 # Left
 nRows <- nrow(HC_L)

@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 # What do I want to do?
-Here, I am creating a number of hippocampal masks that divide the hippocampus along its longitudinal axis. While doing this, I try out the R package `ciftiTools` and explore how it can be used for these kind of operations. Additionally, we can investigate how the hippocampal divisions differ from each other (e.g. in terms of Cole-Anticevic network membership).  
+Here, I am creating a number of hippocampal masks that divide the hippocampus along its longitudinal axis. While doing this, I try out the R package `ciftiTools` and explore how it can be used for these kind of operations. Additionally, we can investigate how the hippocampal divisions differ from each other (e.g. in terms of Cole-Anticevic network membership).
 
 # Libraries used
 ```{r}
