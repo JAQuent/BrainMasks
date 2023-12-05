@@ -15,12 +15,22 @@ network membership).
 ``` r
 # Load the ciftiTools package and point to the Connectome Workbench --------
 library(cifti)
-# install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
+# devtools::install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
 library(ciftiTools)
-ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
+# Use correct location based on the computer used
+if(Sys.info()[4] == "DESKTOP-335I26I"){
+  # Work laptop
+  ciftiTools.setOption("wb_path", "C:/Program Files/workbench-windows64-v1.5.0/workbench/bin_windows64")
+} else if(Sys.info()[4] == 'DESKTOP-91CQCSQ') {
+  ciftiTools.setOption("wb_path", "D:/workbench/bin_windows64")
+} else if(Sys.info()[4] == 'alex-Zenbook-UX3404VA-UX3404VA') {
+  ciftiTools.setOption("wb_path", "/usr/bin/wb_command")
+} else {
+  ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
+}
 ```
 
-    ## Using this Workbench path: 'D:/Program Files/workbench/bin_windows64/wb_command.exe'.
+    ## Using this Workbench path: 'C:/Program Files/workbench-windows64-v1.5.0/workbench/bin_windows64/wb_command.exe'.
 
 ``` r
 # Load other packages --------
@@ -44,77 +54,77 @@ even though it still says 0.11.0 below.
 sessioninfo::session_info()
 ```
 
-    ## - Session info ---------------------------------------------------------------
+    ## ─ Session info ───────────────────────────────────────────────────────────────
     ##  setting  value
     ##  version  R version 4.2.2 (2022-10-31 ucrt)
     ##  os       Windows 10 x64 (build 19045)
     ##  system   x86_64, mingw32
     ##  ui       RTerm
     ##  language (EN)
-    ##  collate  English_United States.1252
-    ##  ctype    English_United States.1252
+    ##  collate  English_United Kingdom.utf8
+    ##  ctype    English_United Kingdom.utf8
     ##  tz       Asia/Taipei
-    ##  date     2023-07-28
+    ##  date     2023-12-05
     ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
-    ## - Packages -------------------------------------------------------------------
+    ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package            * version date (UTC) lib source
     ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.2.0)
-    ##  assortedRFunctions * 0.0.1   2023-07-09 [1] Github (JAQuent/assortedRFunctions@7026463)
+    ##  assortedRFunctions * 0.0.1   2023-11-29 [1] Github (JAQuent/assortedRFunctions@55f2b43)
     ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.2.0)
     ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.2.0)
     ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.2.3)
-    ##  ciftiTools         * 0.11.0  2023-07-27 [1] Github (mandymejia/ciftiTools@de6dda5)
-    ##  cli                  3.6.0   2023-01-09 [1] CRAN (R 4.2.2)
-    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.2.2)
-    ##  cowplot            * 1.1.1   2020-12-30 [1] CRAN (R 4.2.2)
-    ##  digest               0.6.31  2022-12-11 [1] CRAN (R 4.2.2)
-    ##  dplyr                1.1.0   2023-01-29 [1] CRAN (R 4.2.2)
-    ##  evaluate             0.20    2023-01-17 [1] CRAN (R 4.2.2)
-    ##  fansi                1.0.4   2023-01-22 [1] CRAN (R 4.2.2)
-    ##  fastmap              1.1.0   2021-01-25 [1] CRAN (R 4.2.2)
-    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
-    ##  ggplot2            * 3.4.1   2023-02-10 [1] CRAN (R 4.2.2)
+    ##  ciftiTools         * 0.12.2  2023-08-15 [1] CRAN (R 4.2.3)
+    ##  cli                  3.6.1   2023-03-23 [1] CRAN (R 4.2.3)
+    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.2.3)
+    ##  cowplot            * 1.1.1   2020-12-30 [1] CRAN (R 4.2.3)
+    ##  digest               0.6.33  2023-07-07 [1] CRAN (R 4.2.3)
+    ##  dplyr                1.1.3   2023-09-03 [1] CRAN (R 4.2.3)
+    ##  evaluate             0.22    2023-09-29 [1] CRAN (R 4.2.3)
+    ##  fansi                1.0.5   2023-10-08 [1] CRAN (R 4.2.3)
+    ##  fastmap              1.1.1   2023-02-24 [1] CRAN (R 4.2.3)
+    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.2.3)
+    ##  ggplot2            * 3.4.4   2023-10-12 [1] CRAN (R 4.2.3)
     ##  gifti                0.8.0   2020-11-11 [1] CRAN (R 4.2.3)
-    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.2.2)
-    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.2.2)
-    ##  gtable               0.3.1   2022-09-01 [1] CRAN (R 4.2.2)
-    ##  htmltools            0.5.4   2022-12-07 [1] CRAN (R 4.2.2)
-    ##  knitr              * 1.42    2023-01-25 [1] CRAN (R 4.2.2)
-    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.2.2)
-    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
-    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.2.2)
-    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.2.2)
-    ##  pillar               1.8.1   2022-08-19 [1] CRAN (R 4.2.2)
-    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
-    ##  plyr               * 1.8.8   2022-11-11 [1] CRAN (R 4.2.2)
+    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.2.3)
+    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.2.3)
+    ##  gtable               0.3.4   2023-08-21 [1] CRAN (R 4.2.3)
+    ##  htmltools            0.5.6.1 2023-10-06 [1] CRAN (R 4.2.3)
+    ##  knitr              * 1.44    2023-09-11 [1] CRAN (R 4.2.3)
+    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.2.3)
+    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.2.3)
+    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.2.3)
+    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.2.3)
+    ##  pillar               1.9.0   2023-03-22 [1] CRAN (R 4.2.3)
+    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.2.3)
+    ##  plyr               * 1.8.9   2023-10-02 [1] CRAN (R 4.2.3)
     ##  R.methodsS3          1.8.2   2022-06-13 [1] CRAN (R 4.2.2)
     ##  R.oo                 1.25.0  2022-06-12 [1] CRAN (R 4.2.2)
     ##  R.utils              2.12.2  2022-11-11 [1] CRAN (R 4.2.3)
-    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.2.2)
+    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.2.3)
     ##  RColorBrewer         1.1-3   2022-04-03 [1] CRAN (R 4.2.0)
-    ##  Rcpp                 1.0.10  2023-01-22 [1] CRAN (R 4.2.2)
-    ##  rlang                1.0.6   2022-09-24 [1] CRAN (R 4.2.2)
-    ##  rmarkdown            2.20    2023-01-19 [1] CRAN (R 4.2.2)
-    ##  RNifti               1.4.5   2023-01-30 [1] CRAN (R 4.2.2)
-    ##  rstudioapi           0.14    2022-08-22 [1] CRAN (R 4.2.2)
-    ##  scales               1.2.1   2022-08-20 [1] CRAN (R 4.2.2)
-    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
-    ##  tibble               3.1.8   2022-07-22 [1] CRAN (R 4.2.2)
-    ##  tidyselect           1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
-    ##  utf8                 1.2.3   2023-01-31 [1] CRAN (R 4.2.2)
-    ##  vctrs                0.5.2   2023-01-23 [1] CRAN (R 4.2.2)
-    ##  viridis            * 0.6.3   2023-05-03 [1] CRAN (R 4.2.3)
-    ##  viridisLite        * 0.4.1   2022-08-22 [1] CRAN (R 4.2.2)
-    ##  withr                2.5.0   2022-03-03 [1] CRAN (R 4.2.2)
-    ##  xfun                 0.37    2023-01-31 [1] CRAN (R 4.2.2)
-    ##  xml2                 1.3.3   2021-11-30 [1] CRAN (R 4.2.2)
-    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.2.2)
+    ##  Rcpp                 1.0.11  2023-07-06 [1] CRAN (R 4.2.3)
+    ##  rlang                1.1.1   2023-04-28 [1] CRAN (R 4.2.3)
+    ##  rmarkdown            2.25    2023-09-18 [1] CRAN (R 4.2.3)
+    ##  RNifti               1.5.0   2023-05-17 [1] CRAN (R 4.2.3)
+    ##  rstudioapi           0.15.0  2023-07-07 [1] CRAN (R 4.2.3)
+    ##  scales               1.2.1   2022-08-20 [1] CRAN (R 4.2.3)
+    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.2.3)
+    ##  tibble               3.2.1   2023-03-20 [1] CRAN (R 4.2.3)
+    ##  tidyselect           1.2.0   2022-10-10 [1] CRAN (R 4.2.3)
+    ##  utf8                 1.2.3   2023-01-31 [1] CRAN (R 4.2.3)
+    ##  vctrs                0.6.4   2023-10-12 [1] CRAN (R 4.2.3)
+    ##  viridis            * 0.6.4   2023-07-22 [1] CRAN (R 4.2.3)
+    ##  viridisLite        * 0.4.2   2023-05-02 [1] CRAN (R 4.2.3)
+    ##  withr                2.5.1   2023-09-26 [1] CRAN (R 4.2.3)
+    ##  xfun                 0.40    2023-08-09 [1] CRAN (R 4.2.3)
+    ##  xml2                 1.3.5   2023-07-06 [1] CRAN (R 4.2.3)
+    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.2.3)
     ## 
-    ##  [1] C:/Users/Alex/AppData/Local/R/win-library/4.2
+    ##  [1] C:/Users/Polly/AppData/Local/R/win-library/4.2
     ##  [2] C:/Program Files/R/R-4.2.2/library
     ## 
-    ## ------------------------------------------------------------------------------
+    ## ──────────────────────────────────────────────────────────────────────────────
 
 </details>
 
@@ -350,8 +360,8 @@ HC_coord_left  <- MNI_coord[MNI_coord$region == "Hippocampus-L", ]
 HC_coord_right <- MNI_coord[MNI_coord$region == "Hippocampus-R", ]
 
 # Create anterior/posterior variable for left and right hippocampus
-left_AP  <- ifelse(HC_coord_left$y < cutOff, "A", "P")
-right_AP <- ifelse(HC_coord_right$y < cutOff, "A", "P")
+left_AP  <- ifelse(HC_coord_left$y >= cutOff, "A", "P")
+right_AP <- ifelse(HC_coord_right$y >= cutOff, "A", "P")
 ```
 
 When we look at the subdivision, we find that for the left hemisphere
@@ -362,8 +372,8 @@ kable(table(left_AP))
 
 | left_AP | Freq |
 |:--------|-----:|
-| A       |  380 |
-| P       |  384 |
+| A       |  384 |
+| P       |  380 |
 
 that the distributions is pretty symmetric. In contrast, when looking at
 the right hemisphere
@@ -374,8 +384,8 @@ kable(table(right_AP))
 
 | right_AP | Freq |
 |:---------|-----:|
-| A        |  363 |
-| P        |  432 |
+| A        |  432 |
+| P        |  363 |
 
 we find an asymmetry with more posterior voxels. Generally not that the
 right hippocampus in this segmentation is larger than the left with 795
