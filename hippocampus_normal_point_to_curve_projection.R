@@ -22,7 +22,6 @@ beingFitColour   <- "#ffff66"
 finishedColour   <- "#99ff66"
 porjectedPoints  <- "grey"
 
-
 # Libraries
 library(ggplot2)
 library(assortedRFunctions)
@@ -267,27 +266,33 @@ unique_points$position <-  cumsum(unique_points$dist2previous)
 
 # Create plot
 p1 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = position)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = 1) +
+  geom_point(aes(fill = position), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = position)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = 1) +
   coord_fixed() +
-  labs(title = "Projection along the \nshape (left)", x = "MNI y", y = "MNI z")+
+  labs(title = "Projection along the \nshape (left)", x = "MNI y", y = "MNI z") +
+  theme_void() +
   theme(legend.position = "none")
 
 p2 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = y)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = -1) +
+  geom_point(aes(fill = y), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = y)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = -1) +
   coord_fixed() +
-  labs(title = "MNI-y \ncoordinate (left)", x = "MNI y", y = "MNI z")+
+  labs(title = "MNI-y \ncoordinate (left)", x = "MNI y", y = "MNI z") +
+  theme_void() +
   theme(legend.position = "none")
 
 p3 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = z)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = 1) +
+  geom_point(aes(fill = z), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = z)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = 1) +
   coord_fixed() +
-  labs(title = "MNI-z \ncoordinate (left)", x = "MNI y", y = "MNI z")+
+  labs(title = "MNI-z \ncoordinate (left)", x = "MNI y", y = "MNI z") +
+  theme_void() +
   theme(legend.position = "none")
 
 # Save unique_points for this hemisphere
@@ -419,27 +424,33 @@ unique_points$position <-  cumsum(unique_points$dist2previous)
 
 # Create plot
 p4 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = position)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = 1) +
+  geom_point(aes(fill = position), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = position)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = 1) +
   coord_fixed() +
-  labs(title = "Projection along the \nshape (right)", x = "MNI y", y = "MNI z")+
+  labs(title = "Projection along the \nshape (right)", x = "MNI y", y = "MNI z") +
+  theme_void() + 
   theme(legend.position = "none")
 
 p5 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = y)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = -1) +
+  geom_point(aes(fill = y), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = y)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = -1) +
   coord_fixed() +
-  labs(title = "MNI-y \ncoordinate (right)", x = "MNI y", y = "MNI z")+
+  labs(title = "MNI-y \ncoordinate (right)", x = "MNI y", y = "MNI z") +
+  theme_void() + 
   theme(legend.position = "none")
 
 p6 <- ggplot(unique_points, aes(x = y, y = z)) + 
-  geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = z)) +
-  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "white", size = 1) +
-  scale_fill_viridis_c(option = "C", direction = 1) +
+  geom_point(aes(fill = z), pch = 21, size = 5) +
+  #geom_rect(aes(xmin =  y - 1, xmax = y + 1, ymin = z - 1, ymax = z + 1, fill = z)) +
+  geom_line(data = sampleCurve, mapping = aes(x = y, y = z_prime), colour = "grey", size = 1) +
+  scale_fill_viridis_c(option = "H", direction = 1) +
   coord_fixed() +
-  labs(title = "MNI-z \ncoordinate (right)", x = "MNI y", y = "MNI z")+
+  labs(title = "MNI-z \ncoordinate (right)", x = "MNI y", y = "MNI z") +
+  theme_void() + 
   theme(legend.position = "none")
 
 # Save unique_points for this hemisphere
@@ -450,6 +461,29 @@ unique_points_R <- unique_points
 # */
 # Visualise the difference
 plot_grid(p1, p2, p3, p4, p5, p6, ncol = 3)
+
+# Save plots for later use
+## Left
+current_plot <- p1 + labs(title = "")
+ggsave("figures/L_projected.png", current_plot,
+       width = 10, height = 10, units = "cm")
+current_plot <- p2 + labs(title = "")
+ggsave("figures/L_MNIy.png", current_plot,
+       width = 10, height = 10, units = "cm")
+current_plot <- p3 + labs(title = "")
+ggsave("figures/L_MNIz.png", current_plot,
+       width = 10, height = 10, units = "cm")
+
+## Right
+current_plot <- p4 + labs(title = "")
+ggsave("figures/R_projected.png", current_plot,
+       width = 10, height = 10, units = "cm")
+current_plot <- p5 + labs(title = "")
+ggsave("figures/R_MNIy.png", current_plot,
+       width = 10, height = 10, units = "cm")
+current_plot <- p6 + labs(title = "")
+ggsave("figures/R_MNIz.png", current_plot,
+       width = 10, height = 10, units = "cm")
 
 # Combine results and save
 projected_HC <- rbind(unique_points_R, unique_points_L)
@@ -481,7 +515,7 @@ R_HC_index <- HC_xifti_MNI$meta$subcort$labels == "Hippocampus-R"
 # Get the unique values and create colour labels
 yValues  <- sort(unique(c(HC_R$y, HC_L$y)))
 yN       <- length(yValues)
-yColours <- viridis(n = yN, option = "C")
+yColours <- viridis(n = yN, option = "H")
 
 # Reserve the colours to match the projection
 yColours <- yColours[length(yColours):1]
@@ -568,7 +602,7 @@ for(i in 1:nrow(projected_HC_R)){
 # Get the unique values and create colour labels
 yValues  <- sort(unique(c(HC_R$position, HC_L$position)))
 yN       <- length(yValues)
-yColours <- viridis(n = yN, option = "C")
+yColours <- viridis(n = yN, option = "H")
 
 # Change hippocampus data______________
 # Left
