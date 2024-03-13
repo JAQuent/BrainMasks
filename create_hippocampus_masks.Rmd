@@ -247,8 +247,8 @@ HC_coord_left  <- MNI_coord[MNI_coord$region == "Hippocampus-L", ]
 HC_coord_right <- MNI_coord[MNI_coord$region == "Hippocampus-R", ]
 
 # Create anterior/posterior variable for left and right hippocampus
-left_AP  <- ifelse(HC_coord_left$y >= cutOff, "A", "P")
-right_AP <- ifelse(HC_coord_right$y >= cutOff, "A", "P")
+left_AP  <- ifelse(HC_coord_left$y > cutOff, "A", "P")
+right_AP <- ifelse(HC_coord_right$y > cutOff, "A", "P")
 ```
 
 When we look at the subdivision, we find that for the left hemisphere

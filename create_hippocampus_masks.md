@@ -64,13 +64,13 @@ sessioninfo::session_info()
     ##  collate  English_United Kingdom.utf8
     ##  ctype    English_United Kingdom.utf8
     ##  tz       Asia/Taipei
-    ##  date     2023-12-05
+    ##  date     2024-03-13
     ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package            * version date (UTC) lib source
     ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.2.0)
-    ##  assortedRFunctions * 0.0.1   2023-11-29 [1] Github (JAQuent/assortedRFunctions@55f2b43)
+    ##  assortedRFunctions * 0.0.1   2024-02-26 [1] Github (JAQuent/assortedRFunctions@f54ba91)
     ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.2.0)
     ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.2.0)
     ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.2.3)
@@ -360,8 +360,8 @@ HC_coord_left  <- MNI_coord[MNI_coord$region == "Hippocampus-L", ]
 HC_coord_right <- MNI_coord[MNI_coord$region == "Hippocampus-R", ]
 
 # Create anterior/posterior variable for left and right hippocampus
-left_AP  <- ifelse(HC_coord_left$y >= cutOff, "A", "P")
-right_AP <- ifelse(HC_coord_right$y >= cutOff, "A", "P")
+left_AP  <- ifelse(HC_coord_left$y > cutOff, "A", "P")
+right_AP <- ifelse(HC_coord_right$y > cutOff, "A", "P")
 ```
 
 When we look at the subdivision, we find that for the left hemisphere
