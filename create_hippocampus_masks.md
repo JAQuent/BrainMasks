@@ -47,82 +47,79 @@ library(knitr)
 Click here for detailed session information.
 </summary>
 
-Note that I am using `ciftiTools` installed from the 12.0 GitHub branch
-even though it still says 0.11.0 below.
-
 ``` r
 sessioninfo::session_info()
 ```
 
     ## ─ Session info ───────────────────────────────────────────────────────────────
     ##  setting  value
-    ##  version  R version 4.2.2 (2022-10-31 ucrt)
+    ##  version  R version 4.3.3 (2024-02-29 ucrt)
     ##  os       Windows 10 x64 (build 19045)
     ##  system   x86_64, mingw32
     ##  ui       RTerm
     ##  language (EN)
     ##  collate  English_United Kingdom.utf8
     ##  ctype    English_United Kingdom.utf8
-    ##  tz       Asia/Taipei
-    ##  date     2024-03-13
+    ##  tz       Asia/Shanghai
+    ##  date     2024-05-09
     ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package            * version date (UTC) lib source
-    ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.2.0)
-    ##  assortedRFunctions * 0.0.1   2024-02-26 [1] Github (JAQuent/assortedRFunctions@f54ba91)
-    ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.2.0)
-    ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.2.0)
-    ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.2.3)
-    ##  ciftiTools         * 0.12.2  2023-08-15 [1] CRAN (R 4.2.3)
-    ##  cli                  3.6.1   2023-03-23 [1] CRAN (R 4.2.3)
-    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.2.3)
-    ##  cowplot            * 1.1.1   2020-12-30 [1] CRAN (R 4.2.3)
-    ##  digest               0.6.33  2023-07-07 [1] CRAN (R 4.2.3)
-    ##  dplyr                1.1.3   2023-09-03 [1] CRAN (R 4.2.3)
-    ##  evaluate             0.22    2023-09-29 [1] CRAN (R 4.2.3)
-    ##  fansi                1.0.5   2023-10-08 [1] CRAN (R 4.2.3)
-    ##  fastmap              1.1.1   2023-02-24 [1] CRAN (R 4.2.3)
-    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.2.3)
-    ##  ggplot2            * 3.4.4   2023-10-12 [1] CRAN (R 4.2.3)
-    ##  gifti                0.8.0   2020-11-11 [1] CRAN (R 4.2.3)
-    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.2.3)
-    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.2.3)
-    ##  gtable               0.3.4   2023-08-21 [1] CRAN (R 4.2.3)
-    ##  htmltools            0.5.6.1 2023-10-06 [1] CRAN (R 4.2.3)
-    ##  knitr              * 1.44    2023-09-11 [1] CRAN (R 4.2.3)
-    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.2.3)
-    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.2.3)
-    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.2.3)
-    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.2.3)
-    ##  pillar               1.9.0   2023-03-22 [1] CRAN (R 4.2.3)
-    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.2.3)
-    ##  plyr               * 1.8.9   2023-10-02 [1] CRAN (R 4.2.3)
-    ##  R.methodsS3          1.8.2   2022-06-13 [1] CRAN (R 4.2.2)
-    ##  R.oo                 1.25.0  2022-06-12 [1] CRAN (R 4.2.2)
-    ##  R.utils              2.12.2  2022-11-11 [1] CRAN (R 4.2.3)
-    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.2.3)
-    ##  RColorBrewer         1.1-3   2022-04-03 [1] CRAN (R 4.2.0)
-    ##  Rcpp                 1.0.11  2023-07-06 [1] CRAN (R 4.2.3)
-    ##  rlang                1.1.1   2023-04-28 [1] CRAN (R 4.2.3)
-    ##  rmarkdown            2.25    2023-09-18 [1] CRAN (R 4.2.3)
-    ##  RNifti               1.5.0   2023-05-17 [1] CRAN (R 4.2.3)
-    ##  rstudioapi           0.15.0  2023-07-07 [1] CRAN (R 4.2.3)
-    ##  scales               1.2.1   2022-08-20 [1] CRAN (R 4.2.3)
-    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.2.3)
-    ##  tibble               3.2.1   2023-03-20 [1] CRAN (R 4.2.3)
-    ##  tidyselect           1.2.0   2022-10-10 [1] CRAN (R 4.2.3)
-    ##  utf8                 1.2.3   2023-01-31 [1] CRAN (R 4.2.3)
-    ##  vctrs                0.6.4   2023-10-12 [1] CRAN (R 4.2.3)
-    ##  viridis            * 0.6.4   2023-07-22 [1] CRAN (R 4.2.3)
-    ##  viridisLite        * 0.4.2   2023-05-02 [1] CRAN (R 4.2.3)
-    ##  withr                2.5.1   2023-09-26 [1] CRAN (R 4.2.3)
-    ##  xfun                 0.40    2023-08-09 [1] CRAN (R 4.2.3)
-    ##  xml2                 1.3.5   2023-07-06 [1] CRAN (R 4.2.3)
-    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.2.3)
+    ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.3.0)
+    ##  assortedRFunctions * 0.0.1   2024-04-06 [1] Github (JAQuent/assortedRFunctions@e8c6018)
+    ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.3.0)
+    ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.3.1)
+    ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.3.3)
+    ##  ciftiTools         * 0.14.0  2024-02-24 [1] CRAN (R 4.3.3)
+    ##  cli                  3.6.1   2023-03-23 [1] CRAN (R 4.3.1)
+    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.3.1)
+    ##  cowplot            * 1.1.3   2024-01-22 [1] CRAN (R 4.3.3)
+    ##  digest               0.6.33  2023-07-07 [1] CRAN (R 4.3.1)
+    ##  dplyr                1.1.3   2023-09-03 [1] CRAN (R 4.3.1)
+    ##  evaluate             0.22    2023-09-29 [1] CRAN (R 4.3.1)
+    ##  fansi                1.0.5   2023-10-08 [1] CRAN (R 4.3.1)
+    ##  fastmap              1.1.1   2023-02-24 [1] CRAN (R 4.3.1)
+    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.3.1)
+    ##  ggplot2            * 3.5.0   2024-02-23 [1] CRAN (R 4.3.3)
+    ##  gifti                0.8.0   2020-11-11 [1] CRAN (R 4.3.3)
+    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.3.1)
+    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.3.1)
+    ##  gtable               0.3.4   2023-08-21 [1] CRAN (R 4.3.1)
+    ##  htmltools            0.5.6.1 2023-10-06 [1] CRAN (R 4.3.1)
+    ##  knitr              * 1.44    2023-09-11 [1] CRAN (R 4.3.1)
+    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.3.1)
+    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.3.1)
+    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.3.1)
+    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.3.3)
+    ##  pillar               1.9.0   2023-03-22 [1] CRAN (R 4.3.1)
+    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.3.1)
+    ##  plyr               * 1.8.9   2023-10-02 [1] CRAN (R 4.3.1)
+    ##  R.methodsS3          1.8.2   2022-06-13 [1] CRAN (R 4.3.1)
+    ##  R.oo                 1.26.0  2024-01-24 [1] CRAN (R 4.3.2)
+    ##  R.utils              2.12.3  2023-11-18 [1] CRAN (R 4.3.3)
+    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.3.1)
+    ##  RColorBrewer         1.1-3   2022-04-03 [1] CRAN (R 4.3.0)
+    ##  Rcpp                 1.0.11  2023-07-06 [1] CRAN (R 4.3.1)
+    ##  rlang                1.1.1   2023-04-28 [1] CRAN (R 4.3.1)
+    ##  rmarkdown            2.25    2023-09-18 [1] CRAN (R 4.3.1)
+    ##  RNifti               1.6.1   2024-03-07 [1] CRAN (R 4.3.3)
+    ##  rstudioapi           0.16.0  2024-03-24 [1] CRAN (R 4.3.3)
+    ##  scales               1.3.0   2023-11-28 [1] CRAN (R 4.3.3)
+    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.3.3)
+    ##  tibble               3.2.1   2023-03-20 [1] CRAN (R 4.3.1)
+    ##  tidyselect           1.2.1   2024-03-11 [1] CRAN (R 4.3.3)
+    ##  utf8                 1.2.3   2023-01-31 [1] CRAN (R 4.3.1)
+    ##  vctrs                0.6.4   2023-10-12 [1] CRAN (R 4.3.1)
+    ##  viridis            * 0.6.5   2024-01-29 [1] CRAN (R 4.3.3)
+    ##  viridisLite        * 0.4.2   2023-05-02 [1] CRAN (R 4.3.1)
+    ##  withr                2.5.1   2023-09-26 [1] CRAN (R 4.3.1)
+    ##  xfun                 0.40    2023-08-09 [1] CRAN (R 4.3.1)
+    ##  xml2                 1.3.6   2023-12-04 [1] CRAN (R 4.3.3)
+    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.3.0)
     ## 
-    ##  [1] C:/Users/Polly/AppData/Local/R/win-library/4.2
-    ##  [2] C:/Program Files/R/R-4.2.2/library
+    ##  [1] C:/Users/Polly/AppData/Local/R/win-library/4.3
+    ##  [2] C:/Program Files/R/R-4.3.3/library
     ## 
     ## ──────────────────────────────────────────────────────────────────────────────
 
@@ -227,15 +224,15 @@ massive.
 # Visualise MNI coordinates of the hippocampus
 
 In order to create the masks, I extracted the MNI coordinates for the
-subcortical voxels. This process can be seen in the corresponding
+subcortical voxels. This process can be followed in the corresponding
 .Rmd/.md file as part of this repository or in this
 [post](https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/).
 
-What I am doing now, is essentially creating a new `xifti` variable
-based on an already existing CIFTI file. I could actually use the
-Cole-Anticevic CIFTI file but here I use the MMP parcellation file from
-Glasser et al. In addition, I load the MNI coordinates that I extracted
-they can be found in this repository or
+I am now creating a new `xifti` variable based on an already existing
+CIFTI file. I could actually use the Cole-Anticevic CIFTI file but here
+I use the MMP parcellation file from Glasser et al. In addition, I load
+the MNI coordinates that I extracted they can be found in this
+repository or
 [here](https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601).
 
 ``` r
@@ -324,15 +321,16 @@ view_cifti_volume(new_xii, plane = "sagittal", n_slices = 16,
 ![](create_hippocampus_masks_files/figure-gfm/show_MNI_xifti-1.png)<!-- -->![](create_hippocampus_masks_files/figure-gfm/show_MNI_xifti-2.png)<!-- -->
 
 As can be seen very nicely, the hippocampi are nicely coloured as a
-function of the y-values, which serves as a sanity check that the MNI
-coordinates that I extracted are actually in the same order as the data.
-Otherwise they would be kind of useless.
+function of the y-values, which serves as a sanity check to make sure
+that the MNI coordinates that I extracted are actually in the same order
+as the data.
 
 # Hippocampus subdivisons based on MNI coordinates
 
-With this out of the way, I can try to create subdivisions of the
-hippocampus based on those MNI coordinates. We start by following
-subdivisions discussed by Poppenk et al. (2013) in their TiCS paper.
+With this out of the way, I now create subdivisions of the hippocampus
+based on those MNI coordinates and use these subdivision to create
+binary masks. For now, I only use the subdivisions discussed by Poppenk
+et al. (2013) in their TiCS paper.
 
 ## Poppenk et al. (2013)
 
@@ -387,7 +385,7 @@ kable(table(right_AP))
 | A        |  432 |
 | P        |  363 |
 
-we find an asymmetry with more posterior voxels. Generally not that the
+we find an asymmetry with more posterior voxels. Generally note that the
 right hippocampus in this segmentation is larger than the left with 795
 vs. 764 respectively. To create a new `xifti` variable and from that a
 new CIFTI file we can repeat what we did above.
@@ -409,8 +407,9 @@ additionalColours <- data.frame(Key = 1:4,
 new_key_colours <- rbind(new_key_colours, additionalColours)
 
 # Add the extra row names
-row.names(new_key_colours)[2:5] <- c("left ant. HC", "left pos. HC", 
-                                     "right ant. HC", "right pos. HC")
+keys <- c("left ant. HC", "left pos. HC", 
+          "right ant. HC", "right pos. HC")
+row.names(new_key_colours)[2:5] <- keys
 
 # Add back to xifti
 xii_AP$meta$cifti$labels$`vertex areas` <- new_key_colours
@@ -444,8 +443,8 @@ view_cifti_volume(xii_AP, plane = "sagittal", n_slices = 16,
 
 ![](create_hippocampus_masks_files/figure-gfm/show_poppenk_AP_xifti-1.png)<!-- -->![](create_hippocampus_masks_files/figure-gfm/show_poppenk_AP_xifti-2.png)<!-- -->
 
-We can also use the `ciftiTools` package to write a new CIFTI file. For
-now, I can write .dlabel files so I am using .dlabel.
+I can also use the `ciftiTools` package to write a new CIFTI file. For
+now, I can only write .dlabel files.
 
 ``` r
 write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
@@ -454,9 +453,43 @@ write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dl
             verbose = FALSE)
 ```
 
+#### Create binary masks
+
+``` r
+# File names
+fileNames <- paste0("masks/Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
+
+# Loop through the keys
+for(i in 1:4){
+  # Create new XIFTI based on boolean
+  temp_masks <- xii_AP == i
+  
+  # Change the key labels
+  old_key_colours <- temp_masks$meta$cifti$labels$`vertex areas`
+  new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
+  row.names(new_key_colours)[1] <- ""
+  additionalColours <- data.frame(Key = 1,
+                                  Red = AP_RGB_colours[1, i],
+                                  Green = AP_RGB_colours[2, i],
+                                  Blue = AP_RGB_colours[3, i],
+                                  Alpha = 1)
+  new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[2] <- keys[i]
+
+  # Add to temp mask  
+  temp_masks$meta$cifti$labels$`vertex areas` <- new_key_colours
+  
+  # Write to disk
+  write_cifti(temp_masks, cifti_fname = fileNames[i],
+              surfL_fname = surfLeft,
+              surfR_fname = surfRight,
+              verbose = FALSE)
+}
+```
+
 ### Head, body and tail (aka percentile-based axis segmentation)
 
-Here is the corresponding paragraph from the paper:
+In Poppenk, I also found this segmentation:
 
 > The hippocampus is sometimes described with respect to its medial axis
 > or the y axis in AC–PC space, allowing localization within the
@@ -469,8 +502,6 @@ Here is the corresponding paragraph from the paper:
 > the standard-space hippocampus is the aHPC; and percentile-based
 > conventions correspond approximately to coordinate- based
 > localization.
-
-Now, I am trying to follow this recipe
 
 ``` r
 # Range to calculate length of hippocampus
@@ -544,22 +575,23 @@ xii_HBT$data$subcort      <- matrix(as.integer(rep(0, length(xii_HBT$data$subcor
 
 # Change keys ----------------
 # The four colours that I want to use for left H, B & T, right H, B & T
-AP_colours     <- c("#ffccff", "#ff66ff", "#cc00cc", "#ccffcc", "#33cc33", "#009933")
-AP_RGB_colours <- RGB_Col <- col2rgb(AP_colours)/255
+HBT_colours     <- c("#ffccff", "#ff66ff", "#cc00cc", "#ccffcc", "#33cc33", "#009933")
+HBT_RGB_colours <- RGB_Col <- col2rgb(HBT_colours)/255
 
 # Create new colours
 new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
 row.names(new_key_colours)[1] <- ""
 additionalColours <- data.frame(Key = 1:6,
-                                Red = AP_RGB_colours[1, ],
-                                Green = AP_RGB_colours[2, ],
-                                Blue = AP_RGB_colours[3, ],
+                                Red = HBT_RGB_colours[1, ],
+                                Green = HBT_RGB_colours[2, ],
+                                Blue = HBT_RGB_colours[3, ],
                                 Alpha = 1)
 new_key_colours <- rbind(new_key_colours, additionalColours)
 
 # Add the extra row names
-row.names(new_key_colours)[2:7] <- c("left head HC", "left body HC", "left tail HC", 
-                                     "right head HC", "right body HC", "right tail HC")
+keys <- c("left head HC", "left body HC", "left tail HC", 
+           "right head HC", "right body HC", "right tail HC")
+row.names(new_key_colours)[2:7] <- keys
 
 # Add back to xifti
 xii_HBT$meta$cifti$labels$`vertex areas` <- new_key_colours
@@ -613,7 +645,42 @@ write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabe
             verbose = FALSE)
 ```
 
-### Cole-Anticevic network membership for the subdvisions
+#### Create binary masks
+
+``` r
+# File names
+fileNames <- paste0("masks/Poppenk_HBT_", c("L_H", "L_B", "L_T", 
+                                            "R_H", "R_B", "R_T"), ".dlabel.nii")
+
+# Loop through the keys
+for(i in 1:6){
+  # Create new XIFTI based on boolean
+  temp_masks <- xii_HBT == i
+  
+  # Change the key labels
+  old_key_colours <- temp_masks$meta$cifti$labels$`vertex areas`
+  new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
+  row.names(new_key_colours)[1] <- ""
+  additionalColours <- data.frame(Key = 1,
+                                  Red = HBT_RGB_colours[1, i],
+                                  Green = HBT_RGB_colours[2, i],
+                                  Blue = HBT_RGB_colours[3, i],
+                                  Alpha = 1)
+  new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[2] <- keys[i]
+
+  # Add to temp mask  
+  temp_masks$meta$cifti$labels$`vertex areas` <- new_key_colours
+  
+  # Write to disk
+  write_cifti(temp_masks, cifti_fname = fileNames[i],
+              surfL_fname = surfLeft,
+              surfR_fname = surfRight,
+              verbose = FALSE)
+}
+```
+
+#### Cole-Anticevic network membership for the subdvisions
 
 Now, I am wondering whether there are any differences along the axis
 when it comes to the networks memberships.

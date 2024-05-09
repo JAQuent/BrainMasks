@@ -39,8 +39,6 @@ library(knitr)
 <details>
  <summary>Click here for detailed session information. </summary>
 
-Note that I am using `ciftiTools` installed from the 12.0 GitHub branch even though it still says 0.11.0 below. 
-
 ```{r session_info}
 sessioninfo::session_info()
 ```
@@ -73,7 +71,6 @@ CA_df <- data.frame(network_Fullnames = network_Fullnames,
                     network_names = network_names,
                     colours = coleAnticevic_colours)
 ```
-
 
 # What Cole-Anticevic networks can be found in the hippocampus?
 Before, I am subdividing the hippocampus, I am curious to see which Cole-Anticevic networks can be found in the hippocampus, which were assigned by looking for the largest correlation of each voxel with the 12 cortical networks. 
@@ -134,9 +131,9 @@ ggplot(HPC_CA_agg, aes(x = Network, y = Frequency, fill = Network)) +
 The bar graphs shows that a) most voxels belong to the default mode network, b) the second most prevalent network is the somatomotor network and c) that the difference between the hemispheres doesn't seem to be massive.  
 
 # Visualise MNI coordinates of the hippocampus
-In order to create the masks, I extracted the MNI coordinates for the subcortical voxels. This process can be seen in the corresponding .Rmd/.md file as part of this repository or in this [post](https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/). 
+In order to create the masks, I extracted the MNI coordinates for the subcortical voxels. This process can be followed in the corresponding .Rmd/.md file as part of this repository or in this [post](https://jaquent.github.io/2023/07/a-way-to-get-mni-coordinates-for-subcortical-voxels-of-a-cifti-file/). 
 
-What I am doing now, is essentially creating a new `xifti` variable based on an already existing CIFTI file. I could actually use the Cole-Anticevic CIFTI file but here I use the MMP parcellation file from Glasser et al. In addition, I load the MNI coordinates that I extracted they can be found in this repository or [here](https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601).
+I am now creating a new `xifti` variable based on an already existing CIFTI file. I could actually use the Cole-Anticevic CIFTI file but here I use the MMP parcellation file from Glasser et al. In addition, I load the MNI coordinates that I extracted they can be found in this repository or [here](https://gist.github.com/JAQuent/b1abc8e5e3375d461850eb641efde601).
 
 ```{r load_MMP}
 # Load MMP parcellation
@@ -221,10 +218,10 @@ view_cifti_volume(new_xii, plane = "sagittal", n_slices = 16,
                   title = "Hippocampi coloured by y-value")
 ```
 
-As can be seen very nicely, the hippocampi are nicely coloured as a function of the y-values, which serves as a sanity check that the MNI coordinates that I extracted are actually in the same order as the data. Otherwise they would be kind of useless. 
+As can be seen very nicely, the hippocampi are nicely coloured as a function of the y-values, which serves as a sanity check to make sure that the MNI coordinates that I extracted are actually in the same order as the data.
 
 # Hippocampus subdivisons based on MNI coordinates
-With this out of the way, I can try to create subdivisions of the hippocampus based on those MNI coordinates. We start by following subdivisions discussed by Poppenk et al. (2013) in their TiCS paper. 
+With this out of the way, I now create subdivisions of the hippocampus based on those MNI coordinates and use these subdivision to create binary masks. For now, I only use the subdivisions discussed by Poppenk et al. (2013) in their TiCS paper. 
 
 ## Poppenk et al. (2013)
 ### Anterior vs. posterior
@@ -263,7 +260,7 @@ that the distributions is pretty symmetric. In contrast, when looking at the rig
 kable(table(right_AP))
 ```
 
-we find an asymmetry with more posterior voxels. Generally not that the right hippocampus in this segmentation is larger than the left with `r nrow(HC_coord_right)` vs. `r nrow(HC_coord_left)` respectively. To create a new `xifti` variable and from that a new CIFTI file we can repeat what we did above.
+we find an asymmetry with more posterior voxels. Generally note that the right hippocampus in this segmentation is larger than the left with `r nrow(HC_coord_right)` vs. `r nrow(HC_coord_left)` respectively. To create a new `xifti` variable and from that a new CIFTI file we can repeat what we did above.
 
 ```{r poppenk_AP_new_xifti}
 # Change keys ----------------
@@ -282,8 +279,9 @@ additionalColours <- data.frame(Key = 1:4,
 new_key_colours <- rbind(new_key_colours, additionalColours)
 
 # Add the extra row names
-row.names(new_key_colours)[2:5] <- c("left ant. HC", "left pos. HC", 
-                                     "right ant. HC", "right pos. HC")
+keys <- c("left ant. HC", "left pos. HC", 
+          "right ant. HC", "right pos. HC")
+row.names(new_key_colours)[2:5] <- keys
 
 # Add back to xifti
 xii_AP$meta$cifti$labels$`vertex areas` <- new_key_colours
@@ -316,7 +314,7 @@ view_cifti_volume(xii_AP, plane = "sagittal", n_slices = 16,
 ```
 
 
-We can also use the `ciftiTools` package to write a new CIFTI file. For now, I can write .dlabel files so I am using .dlabel.
+I can also use the `ciftiTools` package to write a new CIFTI file. For now, I can only write .dlabel files.
 
 ```{r poppenk_AP_write}
 write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
@@ -325,8 +323,42 @@ write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dl
             verbose = FALSE)
 ```
 
+#### Create binary masks
+```{r create_binary_mask}
+# File names
+fileNames <- paste0("masks/Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
+
+# Loop through the keys
+for(i in 1:4){
+  # Create new XIFTI based on boolean
+  temp_masks <- xii_AP == i
+  
+  # Change the key labels
+  old_key_colours <- temp_masks$meta$cifti$labels$`vertex areas`
+  new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
+  row.names(new_key_colours)[1] <- ""
+  additionalColours <- data.frame(Key = 1,
+                                  Red = AP_RGB_colours[1, i],
+                                  Green = AP_RGB_colours[2, i],
+                                  Blue = AP_RGB_colours[3, i],
+                                  Alpha = 1)
+  new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[2] <- keys[i]
+
+  # Add to temp mask  
+  temp_masks$meta$cifti$labels$`vertex areas` <- new_key_colours
+  
+  # Write to disk
+  write_cifti(temp_masks, cifti_fname = fileNames[i],
+              surfL_fname = surfLeft,
+              surfR_fname = surfRight,
+              verbose = FALSE)
+}
+```
+
+
 ### Head, body and tail (aka percentile-based axis segmentation)
-Here is the corresponding paragraph from the paper:
+In Poppenk, I also found this segmentation: 
 
 > The hippocampus is sometimes described with respect to its medial
 axis or the y axis in AC–PC space, allowing localization within the
@@ -339,8 +371,6 @@ the y axis; and the full hippocampus 41 mm. Therefore, the anterior
 34.1% of the standard-space hippocampus is the aHPC; and
 percentile-based conventions correspond approximately to coordinate-
 based localization.
-
-Now, I am trying to follow this recipe
 
 ```{r calc_HC_length}
 # Range to calculate length of hippocampus
@@ -393,22 +423,23 @@ xii_HBT$data$subcort      <- matrix(as.integer(rep(0, length(xii_HBT$data$subcor
 
 # Change keys ----------------
 # The four colours that I want to use for left H, B & T, right H, B & T
-AP_colours     <- c("#ffccff", "#ff66ff", "#cc00cc", "#ccffcc", "#33cc33", "#009933")
-AP_RGB_colours <- RGB_Col <- col2rgb(AP_colours)/255
+HBT_colours     <- c("#ffccff", "#ff66ff", "#cc00cc", "#ccffcc", "#33cc33", "#009933")
+HBT_RGB_colours <- RGB_Col <- col2rgb(HBT_colours)/255
 
 # Create new colours
 new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
 row.names(new_key_colours)[1] <- ""
 additionalColours <- data.frame(Key = 1:6,
-                                Red = AP_RGB_colours[1, ],
-                                Green = AP_RGB_colours[2, ],
-                                Blue = AP_RGB_colours[3, ],
+                                Red = HBT_RGB_colours[1, ],
+                                Green = HBT_RGB_colours[2, ],
+                                Blue = HBT_RGB_colours[3, ],
                                 Alpha = 1)
 new_key_colours <- rbind(new_key_colours, additionalColours)
 
 # Add the extra row names
-row.names(new_key_colours)[2:7] <- c("left head HC", "left body HC", "left tail HC", 
-                                     "right head HC", "right body HC", "right tail HC")
+keys <- c("left head HC", "left body HC", "left tail HC", 
+           "right head HC", "right body HC", "right tail HC")
+row.names(new_key_colours)[2:7] <- keys
 
 # Add back to xifti
 xii_HBT$meta$cifti$labels$`vertex areas` <- new_key_colours
@@ -459,7 +490,43 @@ write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabe
             verbose = FALSE)
 ```
 
-### Cole-Anticevic network membership for the subdvisions
+
+#### Create binary masks
+```{r create_binary_mask2}
+# File names
+fileNames <- paste0("masks/Poppenk_HBT_", c("L_H", "L_B", "L_T", 
+                                            "R_H", "R_B", "R_T"), ".dlabel.nii")
+
+# Loop through the keys
+for(i in 1:6){
+  # Create new XIFTI based on boolean
+  temp_masks <- xii_HBT == i
+  
+  # Change the key labels
+  old_key_colours <- temp_masks$meta$cifti$labels$`vertex areas`
+  new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
+  row.names(new_key_colours)[1] <- ""
+  additionalColours <- data.frame(Key = 1,
+                                  Red = HBT_RGB_colours[1, i],
+                                  Green = HBT_RGB_colours[2, i],
+                                  Blue = HBT_RGB_colours[3, i],
+                                  Alpha = 1)
+  new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[2] <- keys[i]
+
+  # Add to temp mask  
+  temp_masks$meta$cifti$labels$`vertex areas` <- new_key_colours
+  
+  # Write to disk
+  write_cifti(temp_masks, cifti_fname = fileNames[i],
+              surfL_fname = surfLeft,
+              surfR_fname = surfRight,
+              verbose = FALSE)
+}
+```
+
+
+#### Cole-Anticevic network membership for the subdvisions
 Now, I am wondering whether there are any differences along the axis when it comes to the networks memberships. 
 
 ```{r poppenk_HBT_CA, fig.height = 9}
@@ -507,7 +574,6 @@ ggplot(HPC_CA_HBT_agg, aes(x = Network, y = Frequency, fill = Network)) +
   theme_classic() +
   theme(legend.position = "none")
 ```
-
 
 
 
