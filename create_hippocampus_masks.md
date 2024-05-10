@@ -28,11 +28,7 @@ if(Sys.info()[4] == "DESKTOP-335I26I"){
 } else {
   ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
 }
-```
 
-    ## Using this Workbench path: 'C:/Program Files/workbench-windows64-v1.5.0/workbench/bin_windows64/wb_command.exe'.
-
-``` r
 # Load other packages --------
 library(ggplot2)
 library(cowplot)
@@ -53,73 +49,75 @@ sessioninfo::session_info()
 
     ## ─ Session info ───────────────────────────────────────────────────────────────
     ##  setting  value
-    ##  version  R version 4.3.3 (2024-02-29 ucrt)
-    ##  os       Windows 10 x64 (build 19045)
-    ##  system   x86_64, mingw32
-    ##  ui       RTerm
+    ##  version  R version 4.1.2 (2021-11-01)
+    ##  os       Ubuntu 22.04.4 LTS
+    ##  system   x86_64, linux-gnu
+    ##  ui       X11
     ##  language (EN)
-    ##  collate  English_United Kingdom.utf8
-    ##  ctype    English_United Kingdom.utf8
+    ##  collate  en_US.UTF-8
+    ##  ctype    en_US.UTF-8
     ##  tz       Asia/Shanghai
-    ##  date     2024-05-09
-    ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+    ##  date     2024-05-10
+    ##  pandoc   3.1.1 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
     ##  package            * version date (UTC) lib source
-    ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.3.0)
-    ##  assortedRFunctions * 0.0.1   2024-04-06 [1] Github (JAQuent/assortedRFunctions@e8c6018)
-    ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.3.0)
-    ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.3.1)
-    ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.3.3)
-    ##  ciftiTools         * 0.14.0  2024-02-24 [1] CRAN (R 4.3.3)
-    ##  cli                  3.6.1   2023-03-23 [1] CRAN (R 4.3.1)
-    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.3.1)
-    ##  cowplot            * 1.1.3   2024-01-22 [1] CRAN (R 4.3.3)
-    ##  digest               0.6.33  2023-07-07 [1] CRAN (R 4.3.1)
-    ##  dplyr                1.1.3   2023-09-03 [1] CRAN (R 4.3.1)
-    ##  evaluate             0.22    2023-09-29 [1] CRAN (R 4.3.1)
-    ##  fansi                1.0.5   2023-10-08 [1] CRAN (R 4.3.1)
-    ##  fastmap              1.1.1   2023-02-24 [1] CRAN (R 4.3.1)
-    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.3.1)
-    ##  ggplot2            * 3.5.0   2024-02-23 [1] CRAN (R 4.3.3)
-    ##  gifti                0.8.0   2020-11-11 [1] CRAN (R 4.3.3)
-    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.3.1)
-    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.3.1)
-    ##  gtable               0.3.4   2023-08-21 [1] CRAN (R 4.3.1)
-    ##  htmltools            0.5.6.1 2023-10-06 [1] CRAN (R 4.3.1)
-    ##  knitr              * 1.44    2023-09-11 [1] CRAN (R 4.3.1)
-    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.3.1)
-    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.3.1)
-    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.3.1)
-    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.3.3)
-    ##  pillar               1.9.0   2023-03-22 [1] CRAN (R 4.3.1)
-    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.3.1)
-    ##  plyr               * 1.8.9   2023-10-02 [1] CRAN (R 4.3.1)
-    ##  R.methodsS3          1.8.2   2022-06-13 [1] CRAN (R 4.3.1)
-    ##  R.oo                 1.26.0  2024-01-24 [1] CRAN (R 4.3.2)
-    ##  R.utils              2.12.3  2023-11-18 [1] CRAN (R 4.3.3)
-    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.3.1)
-    ##  RColorBrewer         1.1-3   2022-04-03 [1] CRAN (R 4.3.0)
-    ##  Rcpp                 1.0.11  2023-07-06 [1] CRAN (R 4.3.1)
-    ##  rlang                1.1.1   2023-04-28 [1] CRAN (R 4.3.1)
-    ##  rmarkdown            2.25    2023-09-18 [1] CRAN (R 4.3.1)
-    ##  RNifti               1.6.1   2024-03-07 [1] CRAN (R 4.3.3)
-    ##  rstudioapi           0.16.0  2024-03-24 [1] CRAN (R 4.3.3)
-    ##  scales               1.3.0   2023-11-28 [1] CRAN (R 4.3.3)
-    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.3.3)
-    ##  tibble               3.2.1   2023-03-20 [1] CRAN (R 4.3.1)
-    ##  tidyselect           1.2.1   2024-03-11 [1] CRAN (R 4.3.3)
-    ##  utf8                 1.2.3   2023-01-31 [1] CRAN (R 4.3.1)
-    ##  vctrs                0.6.4   2023-10-12 [1] CRAN (R 4.3.1)
-    ##  viridis            * 0.6.5   2024-01-29 [1] CRAN (R 4.3.3)
-    ##  viridisLite        * 0.4.2   2023-05-02 [1] CRAN (R 4.3.1)
-    ##  withr                2.5.1   2023-09-26 [1] CRAN (R 4.3.1)
-    ##  xfun                 0.40    2023-08-09 [1] CRAN (R 4.3.1)
-    ##  xml2                 1.3.6   2023-12-04 [1] CRAN (R 4.3.3)
-    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.3.0)
+    ##  abind                1.4-5   2016-07-21 [1] CRAN (R 4.1.2)
+    ##  assortedRFunctions * 0.0.1   2024-03-24 [1] Github (JAQuent/assortedRFunctions@f40bda9)
+    ##  base64enc            0.1-3   2015-07-28 [1] CRAN (R 4.1.2)
+    ##  bitops               1.0-7   2021-04-24 [1] CRAN (R 4.1.2)
+    ##  cifti              * 0.4.5   2018-02-01 [1] CRAN (R 4.1.2)
+    ##  ciftiTools         * 0.12.2  2023-08-15 [1] CRAN (R 4.1.2)
+    ##  cli                  3.6.1   2023-03-23 [1] CRAN (R 4.1.2)
+    ##  colorspace           2.1-0   2023-01-23 [1] CRAN (R 4.1.2)
+    ##  cowplot            * 1.1.1   2020-12-30 [1] CRAN (R 4.1.2)
+    ##  digest               0.6.33  2023-07-07 [1] CRAN (R 4.1.2)
+    ##  dplyr                1.1.3   2023-09-03 [1] CRAN (R 4.1.2)
+    ##  evaluate             0.22    2023-09-29 [1] CRAN (R 4.1.2)
+    ##  fansi                1.0.5   2023-10-08 [1] CRAN (R 4.1.2)
+    ##  fastmap              1.1.1   2023-02-24 [1] CRAN (R 4.1.2)
+    ##  generics             0.1.3   2022-07-05 [1] CRAN (R 4.1.2)
+    ##  ggplot2            * 3.4.4   2023-10-12 [1] CRAN (R 4.1.2)
+    ##  gifti                0.8.0   2020-11-11 [1] CRAN (R 4.1.2)
+    ##  glue                 1.6.2   2022-02-24 [1] CRAN (R 4.1.2)
+    ##  gridExtra            2.3     2017-09-09 [1] CRAN (R 4.1.2)
+    ##  gtable               0.3.4   2023-08-21 [1] CRAN (R 4.1.2)
+    ##  htmltools            0.5.6.1 2023-10-06 [1] CRAN (R 4.1.2)
+    ##  knitr              * 1.44    2023-09-11 [1] CRAN (R 4.1.2)
+    ##  lifecycle            1.0.3   2022-10-07 [1] CRAN (R 4.1.2)
+    ##  magrittr             2.0.3   2022-03-30 [1] CRAN (R 4.1.2)
+    ##  munsell              0.5.0   2018-06-12 [1] CRAN (R 4.1.2)
+    ##  oro.nifti            0.11.4  2022-08-10 [1] CRAN (R 4.1.2)
+    ##  pillar               1.9.0   2023-03-22 [1] CRAN (R 4.1.2)
+    ##  pkgconfig            2.0.3   2019-09-22 [1] CRAN (R 4.1.2)
+    ##  plyr               * 1.8.9   2023-10-02 [1] CRAN (R 4.1.2)
+    ##  R.methodsS3          1.8.2   2022-06-13 [1] CRAN (R 4.1.2)
+    ##  R.oo                 1.25.0  2022-06-12 [1] CRAN (R 4.1.2)
+    ##  R.utils              2.12.2  2022-11-11 [1] CRAN (R 4.1.2)
+    ##  R6                   2.5.1   2021-08-19 [1] CRAN (R 4.1.2)
+    ##  RColorBrewer         1.1-3   2022-04-03 [1] CRAN (R 4.1.2)
+    ##  Rcpp                 1.0.11  2023-07-06 [1] CRAN (R 4.1.2)
+    ##  rlang                1.1.1   2023-04-28 [1] CRAN (R 4.1.2)
+    ##  rmarkdown            2.25    2023-09-18 [1] CRAN (R 4.1.2)
+    ##  RNifti               1.5.0   2023-05-17 [1] CRAN (R 4.1.2)
+    ##  rstudioapi           0.15.0  2023-07-07 [1] CRAN (R 4.1.2)
+    ##  scales               1.2.1   2022-08-20 [1] CRAN (R 4.1.2)
+    ##  sessioninfo          1.2.2   2021-12-06 [1] CRAN (R 4.1.2)
+    ##  tibble               3.2.1   2023-03-20 [1] CRAN (R 4.1.2)
+    ##  tidyselect           1.2.0   2022-10-10 [1] CRAN (R 4.1.2)
+    ##  utf8                 1.2.4   2023-10-22 [1] CRAN (R 4.1.2)
+    ##  vctrs                0.6.4   2023-10-12 [1] CRAN (R 4.1.2)
+    ##  viridis            * 0.6.4   2023-07-22 [1] CRAN (R 4.1.2)
+    ##  viridisLite        * 0.4.2   2023-05-02 [1] CRAN (R 4.1.2)
+    ##  withr                2.5.1   2023-09-26 [1] CRAN (R 4.1.2)
+    ##  xfun                 0.40    2023-08-09 [1] CRAN (R 4.1.2)
+    ##  xml2                 1.3.5   2023-07-06 [1] CRAN (R 4.1.2)
+    ##  yaml                 2.3.7   2023-01-23 [1] CRAN (R 4.1.2)
     ## 
-    ##  [1] C:/Users/Polly/AppData/Local/R/win-library/4.3
-    ##  [2] C:/Program Files/R/R-4.3.3/library
+    ##  [1] /home/alex/R/x86_64-pc-linux-gnu-library/4.1
+    ##  [2] /usr/local/lib/R/site-library
+    ##  [3] /usr/lib/R/site-library
+    ##  [4] /usr/lib/R/library
     ## 
     ## ──────────────────────────────────────────────────────────────────────────────
 
@@ -447,7 +445,7 @@ I can also use the `ciftiTools` package to write a new CIFTI file. For
 now, I can only write .dlabel files.
 
 ``` r
-write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
+write_cifti(xii_AP, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -457,7 +455,7 @@ write_cifti(xii_AP, cifti_fname = "masks/Poppenk_subdiv_HC_anterior_posterior.dl
 
 ``` r
 # File names
-fileNames <- paste0("masks/Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
+fileNames <- paste0("masks/dlabel//Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
 
 # Loop through the keys
 for(i in 1:4){
@@ -474,6 +472,7 @@ for(i in 1:4){
                                   Blue = AP_RGB_colours[3, i],
                                   Alpha = 1)
   new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[1] <- "???"
   row.names(new_key_colours)[2] <- keys[i]
 
   # Add to temp mask  
@@ -639,7 +638,7 @@ Again, for now I just write the while as a .dlabel file because I get an
 error message for .dlabel
 
 ``` r
-write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
+write_cifti(xii_HBT, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -649,7 +648,7 @@ write_cifti(xii_HBT, cifti_fname = "masks/Poppenk_subdiv_HC_head_body_tail.dlabe
 
 ``` r
 # File names
-fileNames <- paste0("masks/Poppenk_HBT_", c("L_H", "L_B", "L_T", 
+fileNames <- paste0("masks/dlabel//Poppenk_HBT_", c("L_H", "L_B", "L_T", 
                                             "R_H", "R_B", "R_T"), ".dlabel.nii")
 
 # Loop through the keys
@@ -667,6 +666,7 @@ for(i in 1:6){
                                   Blue = HBT_RGB_colours[3, i],
                                   Alpha = 1)
   new_key_colours <- rbind(new_key_colours, additionalColours)
+  row.names(new_key_colours)[1] <- "???"
   row.names(new_key_colours)[2] <- keys[i]
 
   # Add to temp mask  
