@@ -317,7 +317,7 @@ view_cifti_volume(xii_AP, plane = "sagittal", n_slices = 16,
 I can also use the `ciftiTools` package to write a new CIFTI file. For now, I can only write .dlabel files.
 
 ```{r poppenk_AP_write}
-write_cifti(xii_AP, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
+write_cifti(xii_AP, cifti_fname = "masks/other/dlabel/Poppenk_subdiv_HC_anterior_posterior.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -326,7 +326,7 @@ write_cifti(xii_AP, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_anterior_post
 #### Create binary masks
 ```{r create_binary_mask}
 # File names
-fileNames <- paste0("masks/dlabel//Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
+fileNames <- paste0("masks/HC_axis/dlabel/Poppenk_AP_", c("L_A", "L_P", "R_A", "R_P"), ".dlabel.nii")
 
 # Loop through the keys
 for(i in 1:4){
@@ -487,7 +487,7 @@ view_cifti_volume(xii_HBT, plane = "sagittal", n_slices = 16,
 Again, for now I just write the while as a .dlabel file because I get an error message for .dlabel
  
 ```{r poppenk_HBT_write}
-write_cifti(xii_HBT, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
+write_cifti(xii_HBT, cifti_fname = "masks/other/dlabel/Poppenk_subdiv_HC_head_body_tail.dlabel.nii",
             surfL_fname = surfLeft,
             surfR_fname = surfRight,
             verbose = FALSE)
@@ -497,7 +497,7 @@ write_cifti(xii_HBT, cifti_fname = "masks/dlabel//Poppenk_subdiv_HC_head_body_ta
 #### Create binary masks
 ```{r create_binary_mask2}
 # File names
-fileNames <- paste0("masks/dlabel//Poppenk_HBT_", c("L_H", "L_B", "L_T", 
+fileNames <- paste0("masks/HC_axis/dlabel/Poppenk_HBT_", c("L_H", "L_B", "L_T", 
                                             "R_H", "R_B", "R_T"), ".dlabel.nii")
 
 # Loop through the keys

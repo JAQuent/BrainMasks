@@ -5,13 +5,8 @@
 library(stringr)
 
 # List all files
-allFiles <- list.files("masks/dlabel", full.names = TRUE)
-
-# Only use files we're interested in
-allFiles <- allFiles[str_detect(allFiles, pattern = "Poppenk_AP") | str_detect(allFiles, pattern = "Poppenk_HBT")]
-
-# Output folder
-outputFolder <- "masks/dscalar/"
+allFiles <- list.files("masks/HC_axis/dlabel", full.names = TRUE)
+allFiles <- c(allFiles, list.files("masks/FreeSurfer_regions/dlabel", full.names = TRUE))
 
 # Create a dscalar ROI file
 base_cm <- "wb_command -cifti-label-to-roi INPUT OUTPUT -key 1 -map 1"
