@@ -62,7 +62,6 @@ for(i in 1:length(subcort_regions)){
   # Change the key labels
   old_key_colours <- temp_masks$meta$cifti$labels$`vertex areas`
   new_key_colours <- old_key_colours[-(2:nrow(old_key_colours)),]
-  row.names(new_key_colours)[1] <- ""
   additionalColours <- data.frame(Key = 1,
                                   Red = 1,
                                   Green = 0,
