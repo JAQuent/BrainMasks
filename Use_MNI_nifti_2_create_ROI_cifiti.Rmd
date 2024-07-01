@@ -1,0 +1,101 @@
+---
+title: "Use MNI NIFIT to create subcortical ROI mask in CIFTI"
+author: "Joern Alexander Quent"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Aim
+Here, I will try to use a MNI NIFTI file to create a subcortical ROI mask in CIFTI format. 
+
+Thanks to @damondpham on GitHub for the code pointing to the right direction ([here](https://github.com/mandymejia/ciftiTools/issues/61)).
+
+# Libraries used
+```{r libraries}
+library(oro.nifti)
+library(ciftiTools)
+ciftiTools.setOption("wb_path", "C:/Program Files/workbench/bin_windows64")
+```
+
+<details>
+ <summary>Click here for detailed session information. </summary>
+
+```{r session_info}
+sessioninfo::session_info()
+```
+</details>
+
+
+# Load a cifti file to use as a template
+I load a z-map from a group-level analysis as a template so that the new xifti/cifti matches our data. 
+
+```{r load_cifti_template}
+# Load z-map
+cifti_temp <- "E:/Seafile/imaging_results/SpaNov/OLMe_7T_SpaNov_gradient_6lvl_smo4_MSMAll/cope7.feat/stats/vwc/results_lvl2cope1_dat_ztstat_c1.dscalar.nii"
+temp_xii   <- read_cifti(cifti_temp, brainstructures = "all")
+
+# Create empty xifti based on this template
+new_xii <- newdata_xifti(temp_xii, 0)
+```
+
+# Load the MNI NIFTI file
+Next, I load the MNI image that I want to use as a mask for my analysis. 
+
+```{r load_nifti}
+# https://www.r-bloggers.com/2014/10/working-with-nifti-images-in-r/
+ROI_nii <- readNIfTI("E:/Seafile/imaging_results/Midbrain_Atlases_all/mean_fullMB.nii.gz")
+ROI_nii <- cal_img(ROI_nii) # Not sure if this is necessary
+```
+
+Based on the information below, the .nii image should be in the right format. 
+
+```{r print_nii}
+print(ROI_nii)
+```
+
+For instance, the subcortical mask of our cifti file has the following dimensions: 
+
+```{r cifti_dim}
+dim(temp_xii$meta$subcort$mask)
+```
+
+
+# Using nifti matrix to create a mask
+As the first step, we will binary the group-level mask by rounding. 
+
+```{r round_nii}
+ROI_nii_bin <- round(ROI_nii)
+```
+
+Use the cifti mask to create a one-dimensional matrix that has the correct number of rows that we need for our cifti data (31870 data voxels). 
+
+```{r nii_to_matrix}
+# Use the subcortical mask of the cifti file to create a one-dimensional matrix/vector
+subcort_mask   <- new_xii$meta$subcort$mask
+subcort_matrix <- ROI_nii_bin[subcort_mask]
+
+# Add this as new data to the xifti object
+new_xii$data$subcort <- matrix(subcort_matrix, nrow = length(subcort_matrix), ncol = 1)
+```
+
+Now, `subcort_matrix` has `r length(subcort_matrix)` values, which is exactly the number of voxels in the subcortical mask of the cifti file. If everything is correct, our new object should pass the xifti test.
+
+```{r test_xifti}
+is.xifti(new_xii)
+```
+
+# Visualise the result
+```{r visualise_result}
+view_cifti_volume(new_xii)
+```
+
+Our ROI is supposed to cover the midbrain, which seems to be the case based on the image above. 
+
+# Create midbrain cifti ROI file
+```{r save_cifti}
+write_xifti(new_xii, "E:/Seafile/imaging_results/Midbrain_Atlases_all/SN_VTA_ROI.dscalar.nii")
+```
