@@ -2,7 +2,7 @@
 title: "Use MNI NIFIT to create subcortical ROI mask in CIFTI"
 author: "Joern Alexander Quent"
 date: "`r Sys.Date()`"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
