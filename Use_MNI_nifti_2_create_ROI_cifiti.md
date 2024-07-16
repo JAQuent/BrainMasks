@@ -1,7 +1,7 @@
 Use MNI NIFIT to create subcortical ROI mask in CIFTI
 ================
 Joern Alexander Quent
-2024-07-01
+2024-07-16
 
 # Aim
 
@@ -40,7 +40,7 @@ sessioninfo::session_info()
     ##  collate  English_United Kingdom.utf8
     ##  ctype    English_United Kingdom.utf8
     ##  tz       Asia/Shanghai
-    ##  date     2024-07-01
+    ##  date     2024-07-16
     ##  pandoc   3.1.11 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
     ## 
     ## ─ Packages ───────────────────────────────────────────────────────────────────
@@ -172,9 +172,10 @@ view_cifti_volume(new_xii)
 ![](Use_MNI_nifti_2_create_ROI_cifiti_files/figure-gfm/visualise_result-1.png)<!-- -->
 
 Our ROI is supposed to cover the midbrain, which seems to be the case
-based on the image above.
+based on the image above. Important: the subcortical mask from the CIFTI
+cuts away from voxels from the mask.
 
-# Create midbrain cifti ROI file
+# Create midbrain (SN/VTA) cifti ROI file
 
 ``` r
 write_xifti(new_xii, "E:/Seafile/imaging_results/Midbrain_Atlases_all/SN_VTA_ROI.dscalar.nii")
