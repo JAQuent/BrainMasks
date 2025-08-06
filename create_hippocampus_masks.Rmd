@@ -14,19 +14,6 @@ Here, I am creating a number of hippocampal masks that divide the hippocampus al
 ```{r}
 # Load the ciftiTools package and point to the Connectome Workbench --------
 library(cifti)
-# devtools::install_github("mandymejia/ciftiTools", ref="12.0", upgrade = "never")
-library(ciftiTools)
-# Use correct location based on the computer used
-if(Sys.info()[4] == "DESKTOP-335I26I"){
-  # Work laptop
-  ciftiTools.setOption("wb_path", "C:/Program Files/workbench-windows64-v1.5.0/workbench/bin_windows64")
-} else if(Sys.info()[4] == 'DESKTOP-91CQCSQ') {
-  ciftiTools.setOption("wb_path", "D:/workbench/bin_windows64")
-} else if(Sys.info()[4] == 'alex-Zenbook-UX3404VA-UX3404VA') {
-  ciftiTools.setOption("wb_path", "/usr/bin/wb_command")
-} else {
-  ciftiTools.setOption("wb_path", "D:/Program Files/workbench/bin_windows64")
-}
 
 # Load other packages --------
 library(ggplot2)
@@ -35,6 +22,10 @@ library(assortedRFunctions)
 library(plyr)
 library(viridis)
 library(knitr)
+
+# Load ciftiTools and set workbench paths
+possible_wb_paths <- c("/usr/bin/wb_command", "/home1/Jaquent/Toolboxes/workbench/bin_rh_linux64/")
+load_ciftiTools(possible_wb_paths)
 ```
 <details>
  <summary>Click here for detailed session information. </summary>
@@ -225,7 +216,7 @@ With this out of the way, I now create subdivisions of the hippocampus based on 
 
 ## Poppenk et al. (2013)
 ### Anterior vs. posterior
-In this subdivision, the hippocampi are divided into anterior and posterior based on the dividing line of y = -21 mm (MNI) with everything anterior to that being the anterior hippocampus. This should be relatively easy to do with `ciftiTools`. 
+In this subdivision, the hippocampi are divided into anterior and posterior based on the dividing line of y = -21 mm (MNI) with everything "at or anterior to" that being the anterior hippocampus. This should be relatively easy to do with `ciftiTools`. 
 
 ```{r poppenk_AP}
 # Cut-off decide what's anterior and posterior
@@ -244,8 +235,8 @@ HC_coord_left  <- MNI_coord[MNI_coord$region == "Hippocampus-L", ]
 HC_coord_right <- MNI_coord[MNI_coord$region == "Hippocampus-R", ]
 
 # Create anterior/posterior variable for left and right hippocampus
-left_AP  <- ifelse(HC_coord_left$y > cutOff, "A", "P")
-right_AP <- ifelse(HC_coord_right$y > cutOff, "A", "P")
+left_AP  <- ifelse(HC_coord_left$y >= cutOff, "A", "P")
+right_AP <- ifelse(HC_coord_right$y >= cutOff, "A", "P")
 ```
 
 When we look at the subdivision, we find that for the left hemisphere
